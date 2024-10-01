@@ -52,7 +52,7 @@
                             <a class="nav-link" href="/Default">Catálogo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/ListaProductos.aspx">Lista De Productos</a>
+                            <a class="nav-link" href="/ListadoProductos.aspx">Lista De Productos</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Promo
@@ -68,6 +68,7 @@
         </nav>
 
         <div class="container body-content">
+            <hr />
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
