@@ -13,17 +13,26 @@ namespace Presentacion
     public partial class _Default : Page
     {
         public List<Articulo> ListaArticulos { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloManager negocio= new ArticuloManager();
-            ListaArticulos = negocio.listar();
-
-            if (!IsPostBack)
+            
+            ArticuloManager negocio = new ArticuloManager();
+            
+            try
             {
-                repArticulos.DataSource = ListaArticulos;
-                repArticulos.DataBind();
+                ListaArticulos = negocio.listar();
+
+                if (!IsPostBack)
+                {
+                    repArticulos.DataSource = ListaArticulos;
+                    repArticulos.DataBind();
+                }
             }
-       
+            catch (Exception ex)
+            {
+                Session.Add("error",ex);
+            }
         }
     }
 }

@@ -67,6 +67,7 @@ namespace DBManager
             {
                 datos.cerrarConexion();
             }
+
             return catalogo;
         }
     
