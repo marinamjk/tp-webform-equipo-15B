@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
-        <asp:GridView ID="dgvArticulos" runat="server" class="table table-dark table-striped" AutoGenerateColumns="false">
+        <asp:GridView ID="dgvArticulos" runat="server" class="table table-dark table-striped table-hover" AutoGenerateColumns="false">
             <Columns>
                 <asp:BoundField HeaderText="Código" DataField="Codigo" />
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
