@@ -13,8 +13,15 @@ namespace Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloManager negocio = new ArticuloManager();
+            try
+            {
             dgvArticulos.DataSource = negocio.listar();
             dgvArticulos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
         }
     }
 }
