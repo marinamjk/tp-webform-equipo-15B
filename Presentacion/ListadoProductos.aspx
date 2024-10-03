@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListadoProductos.aspx.cs" Inherits="Presentacion.ListadoProductos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <main aria-labelledby="title">
+
+   <div class="row">
+       <div class="col">
+
         <asp:GridView ID="dgvArticulos" runat="server" class="table table-dark table-striped table-hover" AutoGenerateColumns="false">
             <Columns>
                 <asp:BoundField HeaderText="Código" DataField="Codigo" />
@@ -12,5 +15,7 @@
             </Columns>
         </asp:GridView>
 
-    </main>
+       </div>
+   </div>
+
 </asp:Content>
