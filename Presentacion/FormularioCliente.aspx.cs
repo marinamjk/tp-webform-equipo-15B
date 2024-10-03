@@ -14,15 +14,16 @@ namespace Presentacion
         private Cliente cliente;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+       
         }
 
 
         protected void btnParticipar_Click(object sender, EventArgs e)
         {
-            ClienteManager clienteManager = new ClienteManager();
             try
             {
+                ClienteManager clienteManager = new ClienteManager();
+                int idCliente;
                 if (cliente == null)
                 {
                     cliente = new Cliente();
@@ -34,24 +35,30 @@ namespace Presentacion
                     cliente.Ciudad = txtCiudad.Text;
                     cliente.CP = int.Parse(txtCP.Text);
 
-                    int nuevoCliente= clienteManager.agregarCliente(cliente);
+                    idCliente = clienteManager.agregarCliente(cliente);
+                }
+                else
+                {
+                    idCliente = cliente.Id;
                 }
             }
             catch (Exception ex)
             {
                 Session.Add("error",ex);
             }
-            //Modificar el voucher con el idCliente del nuevoCliente y el idArticulo seleccionado
+            //Modificar el voucher por id con el idCliente y el idArticulo seleccionado
+            //Request.QueryString["idVoucher"];
+            //Request.QueryString["idArticulo"];
             //Redirigir a una pantalla de exito
             Response.Redirect("Default.aspx", false);
         }
 
         protected void txtDocumento_TextChanged(object sender, EventArgs e)
         {
-            ClienteManager clienteManager= new ClienteManager();
             try
             {
-                cliente= clienteManager.buscarClientePorDNI(txtDocumento.Text);
+                ClienteManager clienteManager = new ClienteManager();
+                cliente = clienteManager.buscarClientePorDNI(txtDocumento.Text);
                 if (cliente != null)
                 {
                     txtNombre.Text = cliente.Nombre;
