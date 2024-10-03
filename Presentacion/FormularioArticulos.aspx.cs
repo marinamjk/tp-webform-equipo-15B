@@ -15,6 +15,8 @@ namespace Presentacion
         {
             if (!IsPostBack)
             {
+                cargarMarcas();
+                cargarCategorias();
                 string idQuery = Request.QueryString["id"];
                 if (!string.IsNullOrEmpty(idQuery))
                 {
@@ -24,22 +26,60 @@ namespace Presentacion
 
             }
         }
-        private void cargarArticulo(int id_articulo)
+        private void cargarMarcas()
+        {
+            MarcaManager marcaManager = new MarcaManager();
+            List<Marca> lista = marcaManager.listar();
+
+            ddlMarca.DataSource = lista;
+            ddlMarca.DataTextField = "Descripcion";
+            ddlMarca.DataValueField = "Id";
+            ddlMarca.DataBind();
+        }
+        private void cargarCategorias() 
+        {
+            CategoriaManager categoriaManager = new CategoriaManager();
+            List<Categoria> lista = categoriaManager.listar();
+
+            ddlCategoria.DataSource = lista;
+            ddlCategoria.DataTextField = "Descripcion";
+            ddlCategoria.DataValueField = "id";
+            ddlCategoria.DataBind();
+        
+        }
+        private void cargarArticulo(int idArticulo)
         {
 
             ArticuloManager articulo_manager = new ArticuloManager();
-            Articulo articulo = articulo_manager.listar().FirstOrDefault(a => a.Id == id_articulo);
+            Articulo articulo = articulo_manager.listar().FirstOrDefault(a => a.Id == idArticulo);
 
-            // Verificar si el artículo existe
+            // Si el artículo existe
             if (articulo != null)
             {
-                // Asignar los valores a los controles del formulario
+                // Se asignan los valores a los controles del formulario
                 txtId.Text = articulo.Id.ToString();
                 txtNombre.Text = articulo.Nombre;
                 txtNumero.Text = articulo.Codigo;
                 txtDescripcion.Text = articulo.Descripcion;
-                ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
-                ddlCategoria.SelectedValue = articulo.Categoria.id.ToString();
+                
+                
+                if (ddlMarca.Items.FindByValue(articulo.Marca.Id.ToString()) != null)
+                {
+                    ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
+                }
+                if (ddlCategoria.Items.FindByValue(articulo.Categoria.id.ToString()) != null)
+                {
+                    ddlCategoria.SelectedValue = articulo.Categoria.id.ToString();
+                }
+
+                if (articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+                {
+                    imgArticulo.ImageUrl = articulo.Imagenes[0].ImagenUrl;
+                }
+                else
+                {
+                    imgArticulo.ImageUrl = "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png";
+                }
 
             }
         }
