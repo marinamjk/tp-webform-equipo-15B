@@ -11,6 +11,49 @@ namespace DBManager
 {
     public class ArticuloManager
     {
+        public Articulo ArticuloPorId(int id)
+        {
+            Articulo articulo = null;
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT A.Id as ArticuloId, Codigo, Nombre, A.Descripcion, M.Descripcion as Marca, C.Descripcion as Categoria, A.IdMarca, A.IdCategoria, Precio FROM ARTICULOS A JOIN MARCAS M ON M.Id = A.IdMarca JOIN CATEGORIAS C ON C.Id = A.IdCategoria WHERE A.Id = @Id");
+                datos.setearParametros("@Id", id);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    articulo = new Articulo
+                    {
+                        Id = (int)datos.Lector["ArticuloId"],
+                        Codigo = datos.Lector["Codigo"] as string,
+                        Nombre = datos.Lector["Nombre"] as string,
+                        Descripcion = datos.Lector["Descripcion"] as string,
+                        Marca = new Marca
+                        {
+                            Id = (int)datos.Lector["IdMarca"],
+                            Descripcion = datos.Lector["Marca"] as string
+                        },
+                        Categoria = new Categoria
+                        {
+                            id = (int)datos.Lector["IdCategoria"],
+                            Descripcion = datos.Lector["Categoria"] as string
+                        },
+                        Precio = (decimal)datos.Lector["Precio"],
+                        Imagenes = new ImagenManager().buscarImagenesXArticulo((int)datos.Lector["ArticuloId"])
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return articulo;
+        }
         public List<Articulo> listar()
         {
             List<Articulo> catalogo= new List<Articulo>();

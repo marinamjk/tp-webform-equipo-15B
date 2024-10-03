@@ -10,18 +10,32 @@ namespace Presentacion
 {
     public partial class ListadoProductos : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        
             ArticuloManager negocio = new ArticuloManager();
-            try
+            protected void Page_Load(object sender, EventArgs e)
             {
-            dgvArticulos.DataSource = negocio.listar();
-            dgvArticulos.DataBind();
+                if (!IsPostBack)
+                {
+                    cargarArticulos();
+                }
             }
-            catch (Exception ex)
+
+            private void cargarArticulos()
             {
-                Session.Add("error", ex);
+                dgvArticulos.DataSource = negocio.listar();
+                dgvArticulos.DataBind();
+            }
+            protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                int id = Convert.ToInt32(dgvArticulos.SelectedDataKey.Value);
+                Response.Redirect("FormularioArticulos.aspx?id=" + id);
+            }
+
+            protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+            {
+                dgvArticulos.PageIndex = e.NewPageIndex;
+                cargarArticulos();
             }
         }
-    }
+    
 }
