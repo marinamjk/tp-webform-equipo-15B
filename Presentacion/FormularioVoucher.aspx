@@ -15,7 +15,7 @@
                             <button type="submit" class="btn btn-primary">Verificar</button>
                         </div>
                         <div class="mt-3">
-                            <p id="message" class="text-danger text-center"></p> <!-- Mensajes de error o éxito -->
+                            <p id="message" class="text-danger text-center"></p> <!-- error o no -->
                         </div>
                     </form>
                     </div>
