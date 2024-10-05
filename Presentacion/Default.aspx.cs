@@ -16,9 +16,9 @@ namespace Presentacion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             ArticuloManager negocio = new ArticuloManager();
-            
+
             try
             {
                 ListaArticulos = negocio.listar();
@@ -31,8 +31,12 @@ namespace Presentacion
             }
             catch (Exception ex)
             {
-                Session.Add("error",ex);
+                Session.Add("error", ex);
             }
+        }
+        protected void BtSeleccionar_Click(object sender, EventArgs e)
+        {
+            string valor = ((Button)sender).CommandArgument;
         }
     }
 }
