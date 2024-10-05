@@ -26,11 +26,18 @@ namespace Presentacion
 
                 if (voucher != null)
                 {
-                    message.Text = "Voucher válido";                 
+                    if (voucher.IdCliente != 0)
+                    {
+                        Response.Redirect("VoucherError.aspx");
+                    }
+                    else
+                    {
+                        message.Text = "Voucher válido";                 
+                    }
                 }
                 else
-                {                
-                    message.Text = "El Voucher ingresado es inválido";
+                {
+                    Response.Redirect("VoucherError.aspx");
                 }
 
             
