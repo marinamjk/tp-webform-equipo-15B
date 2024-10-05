@@ -36,7 +36,8 @@ namespace Presentacion
         }
         protected void BtSeleccionar_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
+            string IdArticulo = ((Button)sender).CommandArgument;
+            Response.Redirect("FormularioCliente.ASPX?ID=" + IdArticulo);
         }
     }
 }
