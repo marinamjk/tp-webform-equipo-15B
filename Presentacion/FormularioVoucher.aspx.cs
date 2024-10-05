@@ -1,7 +1,10 @@
-﻿using System;
+﻿using DBManager;
+using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,6 +15,25 @@ namespace Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnVerificar_Click(object sender, EventArgs e)
+        {
+                string codigoVoucher = voucherCode.Text.Trim(); 
+
+                VoucherManager voucherManager = new VoucherManager();
+                Voucher voucher = voucherManager.buscarVoucher(codigoVoucher);//busco el voucher en base
+
+                if (voucher != null)
+                {
+                    message.Text = "Voucher válido";                 
+                }
+                else
+                {                
+                    message.Text = "El Voucher ingresado es inválido";
+                }
+
+            
         }
     }
 }
