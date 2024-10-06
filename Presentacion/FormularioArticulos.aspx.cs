@@ -11,6 +11,7 @@ namespace Presentacion
 {
     public partial class FormularioArticulos : System.Web.UI.Page
     {
+        protected Articulo articulo; 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,9 +23,26 @@ namespace Presentacion
                 {
                     int idArticulo = int.Parse(idQuery);
                     cargarArticulo(idArticulo);
+
+                    if (articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+                    {
+                        repeterImagenes.DataSource = articulo.Imagenes;
+                        repeterImagenes.DataBind();
+                    }
+                    else
+                    {
+                        List<Imagen> imagenesDefault = new List<Imagen>
+                            {
+                                new Imagen {  ImagenUrl = "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png" }
+                            };
+                        repeterImagenes.DataSource = imagenesDefault;
+                        repeterImagenes.DataBind();
+                    }
                 }
 
             }
+
+  
         }
         private void cargarMarcas()
         {
@@ -51,7 +69,7 @@ namespace Presentacion
         {
 
             ArticuloManager articulo_manager = new ArticuloManager();
-            Articulo articulo = articulo_manager.listar().FirstOrDefault(a => a.Id == idArticulo);
+            articulo = articulo_manager.listar().FirstOrDefault(a => a.Id == idArticulo);
 
             // Si el artículo existe
             if (articulo != null)
@@ -72,14 +90,15 @@ namespace Presentacion
                     ddlCategoria.SelectedValue = articulo.Categoria.id.ToString();
                 }
 
-                if (articulo.Imagenes != null && articulo.Imagenes.Count > 0)
-                {
-                    imgArticulo.ImageUrl = articulo.Imagenes[0].ImagenUrl;
-                }
-                else
-                {
-                    imgArticulo.ImageUrl = "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png";
-                }
+                //if (articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+                //{
+                //    imgArticulo.ImageUrl = articulo.Imagenes[0].ImagenUrl;
+                //}
+                //else
+                //{
+                //    imgArticulo.ImageUrl = "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png";
+                //}
+       
 
             }
         }

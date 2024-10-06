@@ -43,7 +43,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="/Default">Catálogo</a>
-                        </li>     
+                        <%--</li>--%>     
                         <li class="nav-item">
                             <a class="nav-link" href="/ListadoProductos.aspx">Lista De Productos</a>
                         </li>
@@ -69,6 +69,7 @@
             </footer>
         </div>
     </form>
+    <script src="Scripts/jquery-3.7.1.slim.min.js"></script>
     <script src="Scripts/bootstrap.bundle.min.js"></script>
     <%--    <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
