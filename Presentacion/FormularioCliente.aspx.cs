@@ -18,7 +18,6 @@ namespace Presentacion
 
         }
 
-
         protected void btnParticipar_Click(object sender, EventArgs e)
         {
             Voucher voucher = new Voucher();

@@ -9,7 +9,7 @@
 
                 <div class="col">
                     <div class="card  border-dark mb-3" style="max-width: 20rem;">
-                        <img src="<%# ((List<dominio.Imagen>)Eval("Imagenes"))[0].ImagenUrl %>>" class="card-img-top" alt="...">
+                        <img src="<%# ((List<dominio.Imagen>)Eval("Imagenes"))[0].ImagenUrl %>>" class="card-img-top" alt="..." style="height: 400px; object-fit: contain;" >
                         <div class="card-body">
                             <h5 class="card-title"><%# Eval("Nombre") %></h5>
                             <p class="card-text"><%# Eval("Descripcion") %></p>
