@@ -52,9 +52,10 @@ namespace Presentacion
                 lblError.Text = "Ocurrió un error: " + ex.Message;
                 lblError.Visible = true;
             }
+
             //Modificar el voucher por id con el idCliente y el idArticulo seleccionado
-            //Request.QueryString["idVoucher"];
-            //Request.QueryString["idArticulo"];
+            //Session["idCodArt"].ToString();
+            //(int)Session["idArtSeleccionado"];
             //Redirigir a una pantalla de exito
             Response.Redirect("Default.aspx", false);
         }

@@ -32,12 +32,15 @@ namespace Presentacion
                     }
                     else
                     {
-                        message.Text = "Voucher válido";                 
+                        message.Text = "Voucher válido";
+                        string idCodVoucher = voucher.CodigoVoucher;
+                        Session.Add("idCodArt", idCodVoucher);
+                        Response.Redirect("FormularioSeleccion.aspx", false);
                     }
                 }
                 else
                 {
-                    Response.Redirect("VoucherError.aspx");
+                    Response.Redirect("VoucherError.aspx",false);
                 }
 
             
