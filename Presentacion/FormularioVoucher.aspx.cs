@@ -34,7 +34,7 @@ namespace Presentacion
                     {
                         message.Text = "Voucher válido";
                         string idCodVoucher = voucher.CodigoVoucher;
-                        Session.Add("idCodArt", idCodVoucher);
+                        Session.Add("IdCoidgoVoucher", idCodVoucher);
                         Response.Redirect("FormularioSeleccion.aspx", false);
                     }
                 }

@@ -21,6 +21,8 @@ namespace Presentacion
 
         protected void btnParticipar_Click(object sender, EventArgs e)
         {
+            Voucher voucher = new Voucher();
+            VoucherManager mVoucher = new VoucherManager();
             try
             {
                 Page.Validate();
@@ -39,25 +41,30 @@ namespace Presentacion
                     cliente.Direccion = txtDireccion.Text;
                     cliente.Ciudad = txtCiudad.Text;
                     cliente.CP = int.Parse(txtCP.Text);
-
                     idCliente = clienteManager.agregarCliente(cliente);
                 }
                 else
                 {
                     idCliente = cliente.Id;
                 }
+                string IdVoucher = Session["IdCoidgoVoucher"].ToString();
+                int IdSelec = ((int)(Session["idArtSeleccionado"]));
+                voucher.CodigoVoucher = IdVoucher;
+                voucher.IdArticulo = IdSelec;
+                voucher.IdCliente = idCliente;
+                voucher.FechaCanje = DateTime.Now;
+                mVoucher.modificar(voucher);
             }
             catch (Exception ex)
             {
                 lblError.Text = "Ocurrió un error: " + ex.Message;
                 lblError.Visible = true;
             }
-
             //Modificar el voucher por id con el idCliente y el idArticulo seleccionado
             //Session["idCodArt"].ToString();
             //(int)Session["idArtSeleccionado"];
             //Redirigir a una pantalla de exito
-            Response.Redirect("Default.aspx", false);
+            Response.Redirect("VoucherExito.aspx", false);
         }
 
         protected void txtDocumento_TextChanged(object sender, EventArgs e)
