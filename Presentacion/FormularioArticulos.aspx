@@ -26,7 +26,7 @@
                 <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server" Enabled="false"></asp:DropDownList>
             </div>
             <div class="mb-3">
-                <a href="ListadoProductos.aspx" class="btn btn-secondary">Cancelar</a>
+                <a href="Default.aspx" class="btn btn-primary">Volver</a>
             </div>
         </div>
 
