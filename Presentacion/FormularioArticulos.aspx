@@ -25,6 +25,12 @@
                 <label for="ddlMarca" class="form-label">Marca</label>
                 <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server" Enabled="false"></asp:DropDownList>
             </div>
+<<<<<<< HEAD
+=======
+            <div class="mb-3">
+                <a href="Default.aspx" class="btn btn-primary">Volver</a>
+            </div>
+>>>>>>> 00f86db459a83b0dd18c22ae5ca3b7f9a7dbe249
         </div>
 
         <div class="col-6">
