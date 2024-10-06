@@ -43,6 +43,30 @@ namespace DBManager
             }
             return aux;
         }
+        public void modificar(Voucher voucher)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Vouchers SET IdCliente = @IdCliente, FechaCanje = @FechaCanje, IdArticulo = @IdArticulo WHERE CodigoVoucher = @CodigoVoucher;");
+            
+                datos.setearParametros("@IdCliente", voucher.IdCliente);
+                datos.setearParametros("@FechaCanje", voucher.FechaCanje);
+                datos.setearParametros("@IdArticulo", voucher.IdArticulo);
+                datos.setearParametros("@CodigoVoucher", voucher.CodigoVoucher);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error - VoucherMAnager - Modificar", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 
