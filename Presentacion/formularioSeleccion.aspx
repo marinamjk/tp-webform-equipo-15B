@@ -11,7 +11,7 @@
                            <h5 class="card-title"><%# Eval("Nombre") %></h5>
                            <p class="card-text"><%# Eval("Descripcion") %></p>
                            <h5 class="card-title"><%# Eval("Precio") %></h5>                            
-                           <a class ="btn btn-primary" href="formularioArticulos.aspx?id=<%# Eval("Id") %>">Detalle </a>
+                           <asp:Button cssclass ="btn btn-primary" ID="BtSeleccion" runat="server" Text="Seleccionar" commandArgument='<%# Eval("Id") %>' CommandName="IdSeleccion" onclick="BtSeleccionar_Click"/>
                        </div>
                    </div>
                </div>
