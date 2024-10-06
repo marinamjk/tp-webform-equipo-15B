@@ -9,8 +9,7 @@
                        <img src="<%# ((List<dominio.Imagen>)Eval("Imagenes"))[0].ImagenUrl %>>" class="card-img-top" alt="...">
                        <div class="card-body">
                            <h5 class="card-title"><%# Eval("Nombre") %></h5>
-                           <p class="card-text"><%# Eval("Descripcion") %></p>
-                           <h5 class="card-title"><%# Eval("Precio") %></h5>                            
+                           <p class="card-text"><%# Eval("Descripcion") %></p>                      
                            <asp:Button cssclass ="btn btn-primary" ID="BtSeleccion" runat="server" Text="Seleccionar" commandArgument='<%# Eval("Id") %>' CommandName="IdSeleccion" onclick="BtSeleccionar_Click"/>
                        </div>
                    </div>
