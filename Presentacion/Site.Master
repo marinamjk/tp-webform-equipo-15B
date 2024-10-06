@@ -43,10 +43,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="/Default">Catálogo</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link" href="formularioSeleccion.aspx">Seleccion</a>
-                        </li>
+                        </li>     
                         <li class="nav-item">
                             <a class="nav-link" href="/ListadoProductos.aspx">Lista De Productos</a>
                         </li>
@@ -55,7 +52,6 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="FormularioVoucher.aspx">Ingresar Voucher </a></li>
-                                <li><a class="dropdown-item" href="#">Ver Premios</a></li>
                             </ul>
                         </li>
                     </ul>
