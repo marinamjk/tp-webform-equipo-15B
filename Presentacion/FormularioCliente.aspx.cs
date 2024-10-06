@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
 using DBManager;
+using System.Text.RegularExpressions;
 
 namespace Presentacion
 {
@@ -14,7 +15,7 @@ namespace Presentacion
         private Cliente cliente;
         protected void Page_Load(object sender, EventArgs e)
         {
-       
+
         }
 
 
@@ -22,6 +23,10 @@ namespace Presentacion
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+            
                 ClienteManager clienteManager = new ClienteManager();
                 int idCliente;
                 if (cliente == null)
@@ -44,7 +49,8 @@ namespace Presentacion
             }
             catch (Exception ex)
             {
-                Session.Add("error",ex);
+                lblError.Text = "Ocurrió un error: " + ex.Message;
+                lblError.Visible = true;
             }
             //Modificar el voucher por id con el idCliente y el idArticulo seleccionado
             //Request.QueryString["idVoucher"];
@@ -55,33 +61,53 @@ namespace Presentacion
 
         protected void txtDocumento_TextChanged(object sender, EventArgs e)
         {
-            try
+            
+            if (!IsValidDocumento(txtDocumento.Text))
             {
+                return;
+            }
+
+            try
+                {
                 ClienteManager clienteManager = new ClienteManager();
                 cliente = clienteManager.buscarClientePorDNI(txtDocumento.Text);
                 if (cliente != null)
-                {
+                {                
+                   
                     txtNombre.Text = cliente.Nombre;
                     txtApellido.Text = cliente.Apellido;
                     txtEmail.Text = cliente.Email;
                     txtDireccion.Text= cliente.Direccion;
                     txtCiudad.Text = cliente.Ciudad;
                     txtCP.Text= (cliente.CP).ToString();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "disableFieldset", "document.getElementById('fieldsetDatos').disabled = true;", true);
+
                 } 
                 else
-                {
-                    txtNombre.Text = string.Empty;
-                    txtApellido.Text = string.Empty;
-                    txtEmail.Text = string.Empty;
-                    txtDireccion.Text = string.Empty;
-                    txtCiudad.Text = string.Empty;
-                    txtCP.Text = string.Empty;
+                {    
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "enableFieldset", "document.getElementById('fieldsetDatos').disabled = false;", true);
+                    LimpiarCampos();
                 }
             }
             catch (Exception ex)
             {
-                Session.Add("error",ex);
+                lblError.Text = "Ocurrió un error: " + ex.Message; 
+                lblError.Visible = true;
             }
+        }
+
+        private bool IsValidDocumento(string documento)
+        {
+            return Regex.IsMatch(documento, "^[0-9]+$");
+        }
+        private void LimpiarCampos()
+        {
+            txtNombre.Text = string.Empty;
+            txtApellido.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+            txtCiudad.Text = string.Empty;
+            txtCP.Text = string.Empty;
         }
     }
 }
