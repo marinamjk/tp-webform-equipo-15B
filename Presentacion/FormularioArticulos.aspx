@@ -39,25 +39,25 @@
                     </div>
                     <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png"
                         runat="server" ID="imgArticulo" Width="60%" />--%>
-                    <div id="carouselImagenes" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <asp:Repeater ID="repeterImagenes" runat="server">
-                                  <ItemTemplate>
-                                <div class="carousel-item<%# Container.ItemIndex == 0 ? " active" : "" %>">
-                                    <asp:Image ImageUrl='<%# Eval("imagenUrl") %>' class="d-block w-100" runat="server" />
-                                </div>
-                                 </ItemTemplate>
-                            </asp:Repeater>
+            <div id="carouselImagenes" class="carousel slide " data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <asp:Repeater ID="repeterImagenes" runat="server">
+                            <ItemTemplate>
+                        <div class="carousel-item<%# Container.ItemIndex == 0 ? " active" : "" %>">
+                            <asp:Image ImageUrl='<%# Eval("imagenUrl") %>' class="d-block w-100" runat="server" style="width: 400px; height: 400px; object-fit: contain;" />
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImagenes" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselImagenes" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
+                            </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+                <button class="carousel-control-prev " type="button" data-bs-target="#carouselImagenes" data-bs-slide="prev">S
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next " type="button" data-bs-target="#carouselImagenes" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
 
             <div class="mb-3 d-flex justify-content-end">
                 <a href="Default.aspx" class="btn btn-secondary">Salir</a>
