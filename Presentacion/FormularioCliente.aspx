@@ -36,20 +36,20 @@
 
                         <asp:TextBox ID="txtDocumento" OnTextChanged="txtDocumento_TextChanged" AutoPostBack="true" runat="server" class="form-control" placeholder="12345678"></asp:TextBox>
                         <label for="txtDocumento">Documento</label>
-                        <asp:RegularExpressionValidator CssClass="validacion" ControlToValidate="txtDocumento" ValidationExpression="^[0-9]+$" runat="server" />
+                        <asp:RegularExpressionValidator ID="DocValidator" CssClass="validacion" ErrorMessage="Ingrese sólo números" ControlToValidate="txtDocumento" ValidationExpression="^[0-9]+$" runat="server" />
                     </div>
                 </div>
                 <div class="col-6">
                 </div>
             </div>
-            <fieldset id="fieldsetDatos" disabled="disabled">
+            <fieldset id="fieldsetDatos" disabled>
                 <div class="row g-3">
                     <div class="col-1">
                     </div>
                     <div class="col-5">
                         <div class="form-floating mb-3">
                             <asp:TextBox ID="txtNombre" runat="server" class="form-control" placeholder="Nombre"></asp:TextBox>
-                            <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="Este campo es requerido." ControlToValidate="txtNombre" runat="server" Display="Static" />
+                            <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="Este campo es requerido." ControlToValidate="txtNombre" runat="server"  />
                             <label for="txtNombre">Nombre</label>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-3">
                     </div>
-
+                    
                     <div class="col-1">
                     </div>
                     <div class="col-4">
@@ -102,8 +102,7 @@
                     </div>
                     <div class="col-1">
                     </div>
-         
-            </fieldset>
+        </fieldset>
             <div class="row g-3">
                 <div class="col-1">
                 </div>

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using dominio;
 using DBManager;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace Presentacion
 {
@@ -15,7 +16,8 @@ namespace Presentacion
         private Cliente cliente;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (IsPostBack)
+                DocValidator.Validate();
         }
 
 
@@ -69,32 +71,38 @@ namespace Presentacion
 
         protected void txtDocumento_TextChanged(object sender, EventArgs e)
         {
-            
+
             if (!IsValidDocumento(txtDocumento.Text))
             {
-                return;
+                // Deshabilitar el fieldset si el documento es inválido
+                string script = "document.getElementById('fieldsetDatos').disabled = true;";
+                ScriptManager.RegisterStartupScript(this, GetType(), "DisableFieldset", script, true);
+                return; // Salir de la función si el documento es inválido
             }
+
+           
 
             try
                 {
                 ClienteManager clienteManager = new ClienteManager();
                 cliente = clienteManager.buscarClientePorDNI(txtDocumento.Text);
-                if (cliente != null)
+                if (!(cliente is null))
                 {                
-                   
+   
                     txtNombre.Text = cliente.Nombre;
                     txtApellido.Text = cliente.Apellido;
                     txtEmail.Text = cliente.Email;
                     txtDireccion.Text= cliente.Direccion;
                     txtCiudad.Text = cliente.Ciudad;
                     txtCP.Text= (cliente.CP).ToString();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "disableFieldset", "document.getElementById('fieldsetDatos').disabled = true;", true);
-
+               
                 } 
                 else
-                {    
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "enableFieldset", "document.getElementById('fieldsetDatos').disabled = false;", true);
+                {
                     LimpiarCampos();
+                    // Habilitar el fieldset si el documento es válido y no exite
+                    string enableScript = "document.getElementById('fieldsetDatos').disabled = false;";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "EnableFieldset", enableScript, true);
                 }
             }
             catch (Exception ex)
